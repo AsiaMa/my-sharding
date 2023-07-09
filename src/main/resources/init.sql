@@ -1,21 +1,17 @@
-create table account_0
+create table account_202301
 (
-    id   bigint      not null primary key,
-    name varchar(32) not null default '',
-    age  int         null
+    id          bigint      not null primary key,
+    name        varchar(32) not null default '',
+    age         int         null,
+    create_date datetime             default CURRENT_TIMESTAMP,
+    update_date datetime             default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
 
-create table account_1
+create table account_202307
 (
-    id   bigint      not null primary key,
-    name varchar(32) not null default '',
-    age  int         null
+    id          bigint      not null primary key,
+    name        varchar(32) not null default '',
+    age         int         null,
+    create_date datetime             default CURRENT_TIMESTAMP,
+    update_date datetime             default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
 );
-
-
-insert into account_0
-values (1, 'asia', 20);
-insert into account_0
-values (2, 'xiu', 20);
-insert into account_1
-values (3, 'bingo', 30);

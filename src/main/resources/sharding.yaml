@@ -29,7 +29,7 @@ rules:
   - !SHARDING
     tables:
       account:
-        actualDataNodes: readwrite_ds.account_${202001..202312}
+        actualDataNodes: readwrite_ds.account_${202301..202312}
         tableStrategy:
           standard:
             shardingColumn: create_date

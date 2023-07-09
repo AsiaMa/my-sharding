@@ -5,6 +5,7 @@ import com.asia.mysharding2.module.account.domain.entity.AccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,6 +17,7 @@ public class AccountService {
         AccountEntity accountEntity = new AccountEntity();
         accountEntity.setName("风刀霜剑");
         accountEntity.setAge(18);
+        accountEntity.setCreateDate(LocalDateTime.now());
 
         accountDao.insert(accountEntity);
     }
