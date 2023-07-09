@@ -27,7 +27,7 @@ rules:
   - !SHARDING
     tables:
       account:
-        actualDataNodes: write_ds.account_${0..1}
+        actualDataNodes: readwrite_ds.account_${0..1}
         tableStrategy:
           standard:
             shardingColumn: id

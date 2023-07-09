@@ -5,6 +5,8 @@ import com.asia.mysharding2.module.account.domain.entity.AccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
     @Autowired
@@ -16,5 +18,9 @@ public class AccountService {
         accountEntity.setAge(18);
 
         accountDao.insert(accountEntity);
+    }
+
+    public List<AccountEntity> list() {
+        return accountDao.selectList(null);
     }
 }
