@@ -29,19 +29,24 @@ rules:
   - !SHARDING
     tables:
       account:
-        actualDataNodes: readwrite_ds.account_${0..1}
+        actualDataNodes: readwrite_ds.account_${202001..202312}
         tableStrategy:
           standard:
-            shardingColumn: id
-            shardingAlgorithmName: account_inline
+            shardingColumn: create_date
+            shardingAlgorithmName: date_interval_sharding
         keyGenerateStrategy:
           column: id
           keyGeneratorName: snowflake
     shardingAlgorithms:
-      account_inline:
-        type: INLINE
+      date_interval_sharding:
+        type: INTERVAL
         props:
-          algorithm-expression: account_${id % 2}
+          datetime-pattern: yyyy-MM-dd HH:mm:ss
+          datetime-lower: "2023-01-01 00:00:00"
+          datetime-upper: "2023-12-31 23:59:59"
+          sharding-suffix-pattern: yyyyMM
+          datetime-interval-amount: 1
+          datetime-interval-unit: MONTHS
     keyGenerators:
       snowflake:
         type: SNOWFLAKE
