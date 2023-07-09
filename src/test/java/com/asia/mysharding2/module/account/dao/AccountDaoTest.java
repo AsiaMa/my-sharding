@@ -15,7 +15,6 @@ class AccountDaoTest {
     @Test
     public void test1() {
         AccountEntity accountEntity = new AccountEntity();
-        accountEntity.setId(1);
         accountEntity.setName("风刀霜剑");
         accountEntity.setAge(100);
 
