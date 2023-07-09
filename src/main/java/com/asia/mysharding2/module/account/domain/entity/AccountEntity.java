@@ -6,7 +6,7 @@ import lombok.Data;
 @TableName("account")
 @Data
 public class AccountEntity {
-    private Integer id;
+    private Long id;
     private String name;
     private Integer age;
 }

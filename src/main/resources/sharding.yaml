@@ -1,0 +1,47 @@
+dataSources:
+  write_ds:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3306/asia_write?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Azjx0813!
+  read_ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3306/asia_read?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Azjx0813!
+
+rules:
+  - !READWRITE_SPLITTING
+    dataSources:
+      readwrite_ds:
+        staticStrategy:
+          writeDataSourceName: write_ds
+          readDataSourceNames:
+            - read_ds_0
+        loadBalancerName: roundRobin
+    loadBalancers:
+      roundRobin:
+        type: ROUND_ROBIN
+  - !SHARDING
+    tables:
+      account:
+        actualDataNodes: write_ds.account_${0..1}
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: account_inline
+        keyGenerateStrategy:
+          column: id
+          keyGeneratorName: snowflake
+    shardingAlgorithms:
+      account_inline:
+        type: INLINE
+        props:
+          algorithm-expression: account_${id % 2}
+    keyGenerators:
+      snowflake:
+        type: SNOWFLAKE
+props:
+  sql-show: true
